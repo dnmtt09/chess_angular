@@ -1,0 +1,19 @@
+<!--
+<main>
+    <ng-container>
+        <div *ngFor="let index of chessNumber" class="flex h-screen items-center justify-center">
+            <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-10 px-10 rounded">
+                Il tuo testo
+            </button>
+        </div>
+    </ng-container>
+</main>-->
+
+<div>
+    <ng-container *ngFor="let row of [1, 2, 3, 4, 5, 6, 7, 8]">
+        <div class="flex">
+            <button *ngFor="let col of [1, 2, 3, 4, 5, 6, 7, 8]" class="flex-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-10 px-10 rounded">
+            </button>
+        </div>
+    </ng-container>
+</div>
