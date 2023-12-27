@@ -6,8 +6,8 @@ import {AppComponent} from './app.component';
 import {ChessboardComponent} from './chessboard/chessboard.component';
 
 @NgModule({
-  declarations: [AppComponent, ChessboardComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, ChessboardComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
