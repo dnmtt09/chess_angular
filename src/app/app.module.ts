@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {ChessboardComponent} from './chessboard/chessboard.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { ChessboardComponent } from "./chessboard/chessboard.component";
 
 @NgModule({
   declarations: [AppComponent],

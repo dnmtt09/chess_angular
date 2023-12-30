@@ -2,11 +2,13 @@ import { Directive, ElementRef, Renderer2 } from "@angular/core";
 
 @Directive({
   standalone: true,
-  selector: '[appInsertImageOnClick]' // Il selettore che attiva la direttiva
+  selector: "[appInsertImageOnClick]", // Il selettore che attiva la direttiva
 })
 export class InsertImageOnClickDirective {
-
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {}
 
   /*@HostListener('click') onClick() {
     // Creazione dell'elemento immagine

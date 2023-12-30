@@ -1,18 +1,16 @@
 import { Directive, HostBinding } from "@angular/core";
 
 @Directive({
-    standalone: true,
-    selector: '[appRandomNumber]'
+  standalone: true,
+  selector: "[appRandomNumber]",
 })
-export class RandomNumberDirective{
+export class RandomNumberDirective {
+  private static idCounter: number = 0;
 
-    private static idCounter: number = 0;
+  @HostBinding("attr.id") randomId: string = "";
 
-    @HostBinding('attr.id') randomId: string = "";
-
-    constructor() {
-        this.randomId = 'button-' + RandomNumberDirective.idCounter;
-        RandomNumberDirective.idCounter++;
-    }
-
+  constructor() {
+    this.randomId = "button-" + RandomNumberDirective.idCounter;
+    RandomNumberDirective.idCounter++;
+  }
 }
