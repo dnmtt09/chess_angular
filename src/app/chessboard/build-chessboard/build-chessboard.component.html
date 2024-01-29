@@ -1,0 +1,15 @@
+
+
+<section class="m-16">
+  <ng-container *ngFor="let i of row; let even=even; let odd=odd">
+    <button
+      class="p-16"
+      id = "{{assignmentIdButton()}}"
+      style="border: 1px solid black"
+      [ngClass]="{
+        dark: even,
+        light: odd
+      }">
+    </button>
+  </ng-container>
+</section>
