@@ -9,18 +9,37 @@ import { CommonModule } from "@angular/common";
   styleUrls: ["./build-chessboard.component.scss"],
 })
 export class BuildChessboardComponent{
-  readonly row: number[] = new Array(63).fill(0);
+  readonly block: number[] = new Array(8);
   idButtonUnique: string = "button-";
   private idCounter: number = 0;
+  colorChess: ('light' | 'dark')[] | null = null;
 
-  constructor() {}
+  constructor() {
+    this.buildArrayOfColorChess();
+    /*for (let i:number =0; i<8; i++) {
+      for (let y: number = 0; y < 8; y++) {
+        console.log(this.colorChess[]);
+      }
+    }*/
+  }
 
   assignmentIdButton() : string {
     return this.idButtonUnique.concat(String(this.idCounter++));
   }
 
-  private populateChessboard(): void {
-
+  private buildArrayOfColorChess(): void {
+    for (let i:number =0; i<8; i++){
+      for (let y:number =0; y<8; y++){
+        let valueOfY: number = y%2;
+        if(!!this.colorChess){
+          if(valueOfY == 0){
+            this.colorChess[valueOfY] = 'dark';
+          }else {
+            this.colorChess[valueOfY] = 'light';
+          }
+        }
+      }
+    }
   }
 
 }
