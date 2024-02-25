@@ -12,5 +12,4 @@ import { HeaderComponent } from "./shared/header/header.component";
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
