@@ -21,7 +21,7 @@ jobs:
       - name: Run Prettier
         run: npm run prettier
       - name: auto commit for formatting code
-        uses: danymatta09/git-auto-commit-action@v4
+        uses: dnmtt09/git-auto-commit-action@v4
         with:
           commit_message: Apply formatting changes with prettier
           branch: ${{ github.head_ref }}
