@@ -1,0 +1,19 @@
+name: Format code on develop push
+
+on:
+  push:
+    branches: ['*']
+
+jobs:
+  format-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Prettier
+        run: npm run prettier
