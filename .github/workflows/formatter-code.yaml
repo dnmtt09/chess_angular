@@ -3,6 +3,7 @@ name: Format code on develop push
 on:
   push:
     branches:
+      - main
       - develop
 
 jobs:
