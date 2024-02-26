@@ -20,7 +20,7 @@ jobs:
           node-version: '16.13.0'
 
       - name: Install CLI
-        run: npm install -g @angular/cli@14.2.13
+        run: npm i
 
       - name: Build
         run: npm run build
