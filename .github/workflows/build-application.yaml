@@ -14,8 +14,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.13.0'
+
+      - name: Install CLI
+        run: npm i
 
       - name: Build
         run: npm run build
