@@ -1,12 +1,19 @@
-<section class="m-16">
-  <ng-container *ngFor="let _ of block">
-    <div class="row-auto">
-      <button *ngFor="let i of block"
-              [ngClass]="{dark: colorChess && colorChess[i] === 'dark',
-  light: colorChess && colorChess[i] === 'light'}"
-              class="p-16"
-              style="border: 1px solid black">
-      </button>
-    </div>
-  </ng-container>
-</section>
+<ng-container *ngIf="!!colorChess">
+  <section class="m-16">
+    <ng-container *ngFor="let _ of block">
+      <div class="row-auto">
+        <ng-container *ngFor="let chess of colorChess; let i = index">
+          <span>{{ chess }}</span>
+          <!--          <button-->
+          <!--            *ngIf="i < 8"-->
+          <!--            [ngClass]="{-->
+          <!--              dark: chess === 'dark',-->
+          <!--              light: chess === 'light'-->
+          <!--            }"-->
+          <!--            class="p-16"-->
+          <!--            style="border: 1px solid black"></button>-->
+        </ng-container>
+      </div>
+    </ng-container>
+  </section>
+</ng-container>

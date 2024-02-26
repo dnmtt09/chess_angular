@@ -14,9 +14,9 @@ import { BuildChessboardComponent } from "./chessboard/build-chessboard/build-ch
     AppRoutingModule,
     HeaderComponent,
     FooterComponent,
-    BuildChessboardComponent],
+    BuildChessboardComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
