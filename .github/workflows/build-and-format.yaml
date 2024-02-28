@@ -11,7 +11,7 @@ on:
 
 jobs:
   pipeline1:
-    if: github.event_name == 'push' && github.ref in ['refs/heads/main', 'refs/heads/develop', 'refs/heads/modify_github_ci']
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
