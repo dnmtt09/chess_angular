@@ -4,6 +4,7 @@ pipeline1:
       branches:
         - main
         - develop
+        - modify_github_ci
     jobs:
       build:
         runs-on: ubuntu-latest
