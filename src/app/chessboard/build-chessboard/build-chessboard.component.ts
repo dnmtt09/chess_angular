@@ -1,65 +1,131 @@
 import { Component, OnDestroy } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { Subject, takeUntil } from "rxjs";
+import { AngularSvgIconModule } from "angular-svg-icon";
+
+enum typeChess {
+  light = "light",
+  black = "black",
+}
+//
+enum player {
+  red = "red",
+  blue = "blue",
+}
+//
+// interface chessboardOption {
+//   typeChess: typeChess[];
+//   player?: player;
+//   id?: string;
+// }
+
+interface chessboardOption {
+  typeChess: typeChess;
+  player: player | null;
+  id: string | null;
+}
 
 @Component({
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AngularSvgIconModule],
   selector: "app-build-chessboard",
   templateUrl: "./build-chessboard.component.html",
   styleUrls: ["./build-chessboard.component.scss"],
 })
 export class BuildChessboardComponent implements OnDestroy {
   readonly block: number[] = new Array(8);
-  readonly chessboard: number[] = new Array(63);
+
+  isReady: boolean = false;
+  chessboard: chessboardOption[] = [];
   idButtonUnique: string = "button-";
+  private chess: Subject<boolean> = new Subject<boolean>();
+  private $unsubscribe: Subject<void> = new Subject<void>();
   private idCounter: number = 0;
-  colorChess: ("light" | "dark")[] = [];
+  private initializeChessboard: typeChess[] = [];
 
   constructor() {
+    this.initializeVariableChessboard();
+    this.chessboardIsReady();
+    this.positionPieces();
+    this.settingsId();
     this.buildArrayOfColorChess();
-    console.log("valore della scacchiera");
-    console.log(this.colorChess);
   }
 
   ngOnDestroy(): void {
-    console.log("Method not implemented.");
+    this.$unsubscribe.next();
+    this.$unsubscribe.complete();
   }
 
   assignmentIdButton(): string {
-    return this.idButtonUnique.concat(String(this.idCounter++));
+    let v = this.idCounter++;
+    console.log("valore di this.idCounter  ", this.idCounter++);
+    return this.idButtonUnique.concat((this.idCounter++).toString());
   }
 
-  // private buildArrayOfColorChess(): void {
-  //   let isDark: boolean = false;
-  //   for (let i: number = 0; i < 63; i++) {
-  //     if(i%8==0){
-  //       isDark ? this.colorChess.push("light") : this.colorChess.push("dark");
-  //     }else{
-  //       isDark ? this.colorChess.push("dark") : this.colorChess.push("light");
-  //       isDark = !isDark;
-  //     }
-  //   }
-  // }
-
-  private buildArrayOfColorChess(): void {
-    let isDark: boolean = true;
-    let activate: boolean = true;
-    for (let y: number = 0; y < 8; y++) {
-      if (!isDark) {
-        this.colorChess.push("light");
-        activate = false;
-      } else {
-        this.colorChess.push("dark");
-        activate = false;
-      }
-      for (let x: number = 0; x < 8; x++) {
-        console.log("entro nel secondo for");
-        if (x > 0) {
-          isDark ? this.colorChess.push("dark") : this.colorChess.push("light");
-          isDark = !isDark;
-          activate = true;
-        }
-      }
+  private initializeVariableChessboard(): void {
+    for (let i = 0; i < 4; i++) {
+      this.initializeChessboard.push(typeChess.black);
+      this.initializeChessboard.push(typeChess.light);
     }
   }
+
+  private chessboardIsReady(): void {
+    this.chess.pipe(takeUntil(this.$unsubscribe)).subscribe(result => {
+      this.isReady = result;
+      console.log("valore scacchiera   ", this.chessboard);
+    });
+  }
+
+  private buildArrayOfColorChess(): void {
+    for (let i: number = 0; i < 8; i++) {
+      this.initializeChessboard.forEach(initializeChess => {
+        console.log("valore di initialize  ", initializeChess);
+        this.chessboard.push({
+          typeChess: initializeChess,
+          player: null,
+          id: null,
+        });
+      });
+      this.initializeChessboard.reverse();
+    }
+
+    this.chess.next(true);
+  }
+
+  private positionPieces(): void {
+    this.chess.pipe(takeUntil(this.$unsubscribe)).subscribe(result => {
+      if (result) {
+        let index: number = 0;
+        this.chessboard.flatMap(chess => {
+          if (index > 0 && index <= 14) {
+            if (chess.typeChess === typeChess.light) {
+              chess.player = player.red;
+            }
+          } else if (index > 48 && index < 65) {
+            if (chess.typeChess === typeChess.light) {
+              chess.player = player.blue;
+            }
+          }
+
+          index++;
+        });
+      }
+    });
+  }
+
+  private settingsId(): void {
+    let index: number = 0;
+    const prefixId: string = "buttonId-";
+    this.chess.pipe(takeUntil(this.$unsubscribe)).subscribe(result => {
+      if (result) {
+        this.chessboard.flatMap(chess => {
+          chess.id = prefixId.concat(index.toString());
+          index++;
+        });
+      }
+    });
+  }
+  // TODO to optimize
+  protected readonly typeChess = typeChess;
+  protected readonly player = player;
 }

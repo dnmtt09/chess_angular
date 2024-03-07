@@ -1,19 +1,19 @@
-<ng-container *ngIf="!!colorChess">
+<ng-container *ngIf="isReady">
   <section class="m-16">
-    <ng-container *ngFor="let _ of block">
-      <div class="row-auto">
-        <ng-container *ngFor="let chess of colorChess; let i = index">
-          <span>{{ chess }}</span>
-          <!--          <button-->
-          <!--            *ngIf="i < 8"-->
-          <!--            [ngClass]="{-->
-          <!--              dark: chess === 'dark',-->
-          <!--              light: chess === 'light'-->
-          <!--            }"-->
-          <!--            class="p-16"-->
-          <!--            style="border: 1px solid black"></button>-->
-        </ng-container>
-      </div>
-    </ng-container>
+    <div class="button-container border">
+      <ng-container *ngFor="let chess of chessboard">
+      <button
+        id="{{chess.id}}"
+        [ngClass]="{
+          dark: chess.typeChess === typeChess.black,
+          light: chess.typeChess === typeChess.light,
+          red: chess.player === player.red ,
+          blue: chess.player === player.blue
+
+        }"
+        class="p-16 border button">
+      </button>
+      </ng-container>
+    </div>
   </section>
 </ng-container>

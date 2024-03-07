@@ -6,15 +6,19 @@ import { AppComponent } from "./app.component";
 import { FooterComponent } from "./shared/footer/footer.component";
 import { HeaderComponent } from "./shared/header/header.component";
 import { BuildChessboardComponent } from "./chessboard/build-chessboard/build-chessboard.component";
+import { NgHttpLoaderModule } from "ng-http-loader";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     HeaderComponent,
     FooterComponent,
     BuildChessboardComponent,
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
