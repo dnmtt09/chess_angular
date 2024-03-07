@@ -97,6 +97,7 @@ export class BuildChessboardComponent implements OnDestroy {
       if (result) {
         let index: number = 0;
         this.chessboard.flatMap(chess => {
+          //TODO to optimize code
           if (index > 0 && index <= 14) {
             if (chess.typeChess === typeChess.light) {
               chess.player = player.red;
