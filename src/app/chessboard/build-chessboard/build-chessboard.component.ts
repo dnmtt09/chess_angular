@@ -37,10 +37,8 @@ export class BuildChessboardComponent implements OnDestroy {
 
   isReady: boolean = false;
   chessboard: chessboardOption[] = [];
-  idButtonUnique: string = "button-";
   private chess: Subject<boolean> = new Subject<boolean>();
   private $unsubscribe: Subject<void> = new Subject<void>();
-  private idCounter: number = 0;
   private initializeChessboard: typeChess[] = [];
 
   constructor() {
@@ -54,12 +52,6 @@ export class BuildChessboardComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.$unsubscribe.next();
     this.$unsubscribe.complete();
-  }
-
-  assignmentIdButton(): string {
-    let v = this.idCounter++;
-    console.log("valore di this.idCounter  ", this.idCounter++);
-    return this.idButtonUnique.concat((this.idCounter++).toString());
   }
 
   private initializeVariableChessboard(): void {
@@ -126,6 +118,7 @@ export class BuildChessboardComponent implements OnDestroy {
       }
     });
   }
+
   // TODO to optimize
   protected readonly typeChess = typeChess;
   protected readonly player = player;
