@@ -1,7 +1,6 @@
 import { Component, OnDestroy } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { Subject, takeUntil } from "rxjs";
-import { AngularSvgIconModule } from "angular-svg-icon";
 
 enum typeChess {
   light = "light",
@@ -27,7 +26,7 @@ interface chessboardOption {
 
 @Component({
   standalone: true,
-  imports: [CommonModule, AngularSvgIconModule],
+  imports: [CommonModule],
   selector: "app-build-chessboard",
   templateUrl: "./build-chessboard.component.html",
   styleUrls: ["./build-chessboard.component.scss"],
@@ -99,7 +98,6 @@ export class BuildChessboardComponent implements OnDestroy {
               chess.player = player.blue;
             }
           }
-
           index++;
         });
       }
