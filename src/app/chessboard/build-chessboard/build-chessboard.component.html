@@ -3,14 +3,14 @@
     <div class="button-container border">
       <ng-container *ngFor="let chess of chessboard">
         <button
-          id="{{ chess.id }}"
           [ngClass]="{
             dark: chess.typeChess === typeChess.black,
             light: chess.typeChess === typeChess.light,
             red: chess.player === player.red,
             blue: chess.player === player.blue
           }"
-          class="p-16 border button"></button>
+          class="p-16 border button"
+        (click)="takeMove(chess.id)"></button>
       </ng-container>
     </div>
   </section>

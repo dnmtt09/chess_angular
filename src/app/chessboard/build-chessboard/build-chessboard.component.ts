@@ -39,6 +39,26 @@ export class BuildChessboardComponent implements OnDestroy {
   private chess: Subject<boolean> = new Subject<boolean>();
   private $unsubscribe: Subject<void> = new Subject<void>();
   private initializeChessboard: typeChess[] = [];
+  private makeMove: string = "";
+  private from: string = "";
+  private to: string = "";
+  private set isMoved(value: boolean) {
+    if (!value) {
+      console.log("entro mai?");
+      this.from = this.makeMove;
+    } else if (value) {
+      this.to = this.makeMove;
+      this.chessboard.flatMap(chess => {
+        if (chess.id == this.from) {
+          chess.player = null;
+        } else if (chess.id == this.to) {
+          this.makeMove = "";
+          console.log("if di else");
+          chess.player = player.blue;
+        }
+      });
+    }
+  }
 
   constructor() {
     this.initializeVariableChessboard();
@@ -46,6 +66,17 @@ export class BuildChessboardComponent implements OnDestroy {
     this.positionPieces();
     this.settingsId();
     this.buildArrayOfColorChess();
+  }
+
+  //PointerEvent
+  takeMove(event: string | null): void {
+    if (event != null && this.makeMove == "") {
+      this.makeMove = event;
+      this.isMoved = false;
+    } else if (event != null && this.makeMove != "") {
+      this.makeMove = event;
+      this.isMoved = true;
+    }
   }
 
   ngOnDestroy(): void {
